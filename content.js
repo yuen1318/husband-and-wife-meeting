@@ -60,7 +60,7 @@ var meetingGuide = {
       icon: "chat",
       leader: "Take turns answering each one fully",
       paragraphs: [
-        "Go through these five questions one at a time. Take turns answering each one fully before moving to the next. Be honest, listen without judgment, and resist the urge to problem-solve—especially for the harder questions. This is about understanding each other's hearts.",
+        "Go through these six questions one at a time. Take turns answering each one fully before moving to the next. Be honest, listen without judgment, and resist the urge to problem-solve—especially for the harder questions. This is about understanding each other's hearts.",
       ],
       questions: [
         {
@@ -82,6 +82,10 @@ var meetingGuide = {
         {
           q: "Is there one thing I could do this week to help you feel supported?",
           note: "Sometimes it's practical. Sometimes it's emotional. But asking builds trust and reminds you both that you're showing up for each other.",
+        },
+        {
+          q: "What's the one thing you'd say to each other if you knew you only had 30 minutes left together?",
+          note: "This cuts through the noise. It reminds you what really matters and keeps your hearts tender toward one another.",
         },
       ],
     },
