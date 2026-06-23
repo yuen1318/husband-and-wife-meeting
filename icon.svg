@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#c9904d"/>
+      <stop offset="100%" stop-color="#8b5a2b"/>
+    </radialGradient>
+  </defs>
+  <!-- Two interlocking rings -->
+  <circle cx="185" cy="220" r="110" stroke="url(#g)" stroke-width="24" fill="none"/>
+  <circle cx="327" cy="220" r="110" stroke="url(#g)" stroke-width="24" fill="none"/>
+  <!-- Cross at top where rings meet -->
+  <rect x="248" y="140" width="16" height="50" rx="8" fill="url(#g)"/>
+  <rect x="236" y="152" width="40" height="16" rx="8" fill="url(#g)"/>
+  <!-- Heart below -->
+  <path d="M256 340c-10-12-110-70-110-130 0-50 40-80 80-80 30 0 50 15 30 15s0-15 30-15c40 0 80 30 80 80 0 60-100 118-110 130z" fill="url(#g)" opacity="0.65"/>
+</svg>

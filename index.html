@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="description" content="A structured weekly meeting guide for couples to reconnect spiritually, emotionally, and practically." />
+
+  <title>Husband & Wife Weekly Meeting</title>
+
+  <!-- PWA links injected by JS (avoid CORS errors on file://) -->
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+
+  <!-- Fonts: Inter (Pin Sans substitute per Pinterest design system) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — "Golden Hour"
+       Warm & grounded. Amber is the ONE accent (wedding-band gold).
+       ============================================================ */
+
+    :root {
+      /* Surfaces — Pinterest design system */
+      --canvas:        #ffffff;
+      --surface:       #f6f6f3;
+      --surface-raised:#ffffff;
+
+      /* Accent — Pinterest Red (the only saturated color on the page) */
+      --primary:       #e60023;
+      --primary-pressed:#cc001f;
+      --primary-glow:  rgba(230, 0, 35, 0.08);
+      --primary-glow-strong: rgba(230, 0, 35, 0.18);
+
+      /* Text — Pinterest tokens */
+      --ink:           #000000;
+      --body:          #33332e;
+      --mute:          #62625b;
+      --mute-light:    #91918c;
+
+      /* Dividers */
+      --hairline:      #dadad3;
+
+      /* Semantic — Pinterest success tones */
+      --done:          #103c25;
+      --done-bg:       #c7f0da;
+
+      /* Toast */
+      --toast-bg:      #262622;
+      --toast-text:    #ffffff;
+
+      /* Radii — Pinterest two-radius vocabulary */
+      --radius-card:   16px;
+      --radius-full:   9999px;
+
+      /* Spacing — 8px base */
+      --space-xs:      8px;
+      --space-sm:      12px;
+      --space-md:      20px;
+      --space-lg:      28px;
+      --space-xl:      40px;
+      --space-section: 56px;
+
+      /* Type scale (mobile-first) — Pinterest-informed */
+      --text-display:  1.75rem;   /* 28px — heading-xl */
+      --text-heading:  1.25rem;   /* 20px */
+      --text-body:     1rem;      /* 16px */
+      --text-caption:  0.875rem;  /* 14px */
+      --text-small:    0.8125rem; /* 13px */
+
+      /* Typography — Inter substitutes Pin Sans */
+      --font-display:  'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-body:     'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+      /* Motion */
+      --ease-out:      cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+      --duration:      350ms;
+      --duration-fast: 200ms;
+
+      /* Shadows — Pinterest: flat, no shadows on cards */
+      --shadow-card:   none;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] {
+      --canvas:        #1a1a1a;
+      --surface:       #262622;
+      --surface-raised:#2d2d2d;
+      --primary:       #e60023;
+      --primary-pressed:#cc001f;
+      --primary-glow:  rgba(230, 0, 35, 0.10);
+      --primary-glow-strong: rgba(230, 0, 35, 0.22);
+      --ink:           #ffffff;
+      --body:          #c5c5c0;
+      --mute:          #91918c;
+      --mute-light:    #62625b;
+      --hairline:      #3d3d3d;
+      --done:          #4a9e6a;
+      --done-bg:       #1a3325;
+      --toast-bg:      #ffffff;
+      --toast-text:    #1a1a1a;
+    }
+
+    /* Tablet+ adjustments */
+    @media (min-width: 600px) {
+      :root {
+        --text-display: 2.5rem;    /* 40px */
+        --text-heading: 1.375rem;  /* 22px */
+        --space-section: 72px;
+      }
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      line-height: 1.6;
+      color: var(--body);
+      background: var(--canvas);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100dvh;
+    }
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Thin decorative bar at the very top — Pinterest Red */
+    body::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: var(--primary);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+
+    .page-header {
+      padding: 48px 0 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .page-header__tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: var(--text-small);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .page-header__title {
+      font-family: var(--font-display);
+      font-size: var(--text-display);
+      font-weight: 600;
+      line-height: 1.18;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .page-header__subtitle {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--mute);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       INTRO CARD
+       ============================================================ */
+
+    .intro-card {
+      background: var(--surface-raised);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      box-shadow: var(--shadow-card);
+    }
+
+    .intro-card__atmosphere {
+      font-size: var(--text-caption);
+      color: var(--mute);
+      line-height: 1.65;
+      margin-bottom: var(--space-md);
+    }
+
+    .intro-card__meta {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .intro-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--text-small);
+      font-weight: 500;
+      color: var(--body);
+    }
+
+    .intro-card__meta-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+       ============================================================ */
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: var(--space-lg);
+      padding: 0 4px;
+    }
+
+    .progress__dot {
+      flex: 1;
+      height: 3px;
+      background: var(--hairline);
+      border-radius: var(--radius-full);
+      transition: background var(--duration-fast) var(--ease-out);
+      position: relative;
+    }
+
+    .progress__dot--done {
+      background: var(--done);
+    }
+
+    .progress__label {
+      font-size: var(--text-small);
+      color: var(--mute-light);
+      text-align: center;
+      min-width: 28px;
+      transition: color var(--duration-fast);
+    }
+
+    .progress__label--done {
+      color: var(--done);
+    }
+
+    /* ============================================================
+       ACCORDION SECTIONS
+       ============================================================ */
+
+    .parts-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .part {
+      background: var(--surface-raised);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--duration) var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Left-edge accent that lights up red when expanded */
+    .part::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 3px;
+      border-radius: 0 3px 3px 0;
+      background: var(--hairline);
+      transition: background var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out);
+    }
+
+    .part--expanded {
+      box-shadow: var(--shadow-card), 0 0 0 1px rgba(230, 0, 35, 0.08);
+    }
+
+    .part--expanded::before {
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--primary-glow-strong);
+    }
+
+    .part--done::before {
+      background: var(--done);
+    }
+
+    /* Accordion header */
+    .part__header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: 18px var(--space-md);
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+      transition: background var(--duration-fast);
+      position: relative;
+    }
+
+    .part__header:hover {
+      background: rgba(230, 0, 35, 0.03);
+    }
+
+    .part__header:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: -2px;
+      border-radius: var(--radius-card);
+    }
+
+    /* Part number badge */
+    .part__number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-caption);
+      font-weight: 700;
+      color: var(--mute);
+      transition: background var(--duration) var(--ease-out), color var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out);
+    }
+
+    .part--expanded .part__number {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 12px var(--primary-glow-strong);
+    }
+
+    .part--done .part__number {
+      background: var(--done-bg);
+      color: var(--done);
+    }
+
+    /* Header text */
+    .part__header-text {
+      flex: 1;
+      min-width: 0;
+      padding-top: 6px;
+    }
+
+    .part__title {
+      display: block;
+      font-size: var(--text-heading);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 4px;
+      transition: color var(--duration-fast);
+    }
+
+    .part__leader {
+      display: block;
+      font-size: var(--text-small);
+      color: var(--mute);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    /* Chevron */
+    .part__chevron {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--duration) var(--ease-out);
+      color: var(--mute-light);
+    }
+
+    .part--expanded .part__chevron {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    .part__chevron svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Accordion body */
+    .part__body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height var(--duration) var(--ease-in-out);
+    }
+
+    .part__body-inner {
+      padding: 0 var(--space-md) var(--space-md);
+    }
+
+    .part__body p {
+      font-size: var(--text-body);
+      line-height: 1.65;
+      color: var(--body);
+      margin-bottom: var(--space-sm);
+    }
+
+    .part__body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Connection questions */
+    .questions-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .questions-list__item {
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface);
+      border-radius: var(--radius-card);
+    }
+
+    .questions-list__q {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: var(--text-body);
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+
+    .questions-list__note {
+      font-size: var(--text-caption);
+      color: var(--mute);
+      line-height: 1.5;
+    }
+
+    /* Done check button */
+    .part__done-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: var(--space-md);
+      padding: 8px 16px;
+      border: 1.5px solid var(--hairline);
+      border-radius: var(--radius-full);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: var(--text-small);
+      font-weight: 500;
+      color: var(--mute);
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-out);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .part__done-btn:hover {
+      border-color: var(--done);
+      color: var(--done);
+    }
+
+    .part__done-btn:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .part__done-btn--checked {
+      background: var(--done-bg);
+      border-color: var(--done);
+      color: var(--done);
+    }
+
+    .part__done-btn__check {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+
+    .page-footer {
+      padding: var(--space-section) 0 32px;
+      text-align: center;
+    }
+
+    .page-footer__rule {
+      width: 40px;
+      height: 1px;
+      background: var(--hairline);
+      margin: 0 auto var(--space-md);
+    }
+
+    .page-footer__text {
+      font-family: var(--font-display);
+      font-size: var(--text-caption);
+      font-style: italic;
+      color: var(--mute-light);
+    }
+
+    /* ============================================================
+       OFFLINE BANNER
+       ============================================================ */
+
+    .offline-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--ink);
+      color: var(--canvas);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-small);
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(45, 34, 28, 0.2);
+      transition: transform var(--duration) var(--ease-out);
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .offline-banner--visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+
+    .toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-120px);
+      background: var(--toast-bg);
+      color: var(--toast-text);
+      padding: 14px 24px;
+      border-radius: var(--radius-card);
+      font-size: var(--text-body);
+      font-weight: 500;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      transition: transform var(--duration) var(--ease-out), opacity var(--duration) var(--ease-out);
+      opacity: 0;
+      z-index: 60;
+      pointer-events: none;
+      max-width: calc(100vw - 48px);
+    }
+
+    .toast--visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ============================================================
+       THEME TOGGLE
+       ============================================================ */
+
+    .theme-toggle {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      border-radius: 9999px;
+      background: var(--hairline);
+      border: none;
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-out);
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+      transition: transform var(--duration-fast) var(--ease-out);
+    }
+
+    [data-theme="dark"] .theme-toggle {
+      background: var(--primary);
+    }
+
+    [data-theme="dark"] .theme-toggle::after {
+      transform: translateX(20px);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================================
+       PRINT
+       ============================================================ */
+
+    @media print {
+      body::before { display: none; }
+      .part__body { max-height: none !important; }
+      .part__chevron { display: none; }
+      .offline-banner { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ==========================================================
+         HEADER
+         ========================================================== -->
+
+    <header class="page-header">
+      <p class="page-header__tag">Weekly Meeting Guide</p>
+      <h1 class="page-header__title"></h1>
+      <p class="page-header__subtitle"></p>
+      <div style="margin-top: var(--space-md);">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+      </div>
+    </header>
+
+    <!-- ==========================================================
+         INTRO
+         ========================================================== -->
+
+    <div class="intro-card">
+      <p class="intro-card__atmosphere"></p>
+      <div class="intro-card__meta">
+        <span class="intro-card__meta-item">
+          <span class="intro-card__meta-icon">🕯️</span>
+          <span class="intro-card__meta-duration"></span>
+        </span>
+        <span class="intro-card__meta-item">
+          <span class="intro-card__meta-icon">📋</span>
+          <span>7 parts · Follow in order</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ==========================================================
+         PROGRESS
+         ========================================================== -->
+
+    <div class="progress" aria-label="Meeting progress">
+      <span class="progress__label" data-part="1">1</span>
+      <span class="progress__dot" data-part="1"></span>
+      <span class="progress__label" data-part="2">2</span>
+      <span class="progress__dot" data-part="2"></span>
+      <span class="progress__label" data-part="3">3</span>
+      <span class="progress__dot" data-part="3"></span>
+      <span class="progress__label" data-part="4">4</span>
+      <span class="progress__dot" data-part="4"></span>
+      <span class="progress__label" data-part="5">5</span>
+      <span class="progress__dot" data-part="5"></span>
+      <span class="progress__label" data-part="6">6</span>
+      <span class="progress__dot" data-part="6"></span>
+      <span class="progress__label" data-part="7">7</span>
+    </div>
+
+    <!-- ==========================================================
+         PARTS (populated by JS)
+         ========================================================== -->
+
+    <ul class="parts-list" id="parts-list" aria-label="Meeting parts"></ul>
+
+    <!-- ==========================================================
+         FOOTER
+         ========================================================== -->
+
+    <footer class="page-footer">
+      <div class="page-footer__rule"></div>
+      <p class="page-footer__text">"Two are better than one." &mdash; Ecclesiastes 4:9</p>
+    </footer>
+
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <!-- Offline banner -->
+  <div class="offline-banner" id="offline-banner" aria-live="polite">
+    You're offline — this guide still works.
+  </div>
+
+  <!-- ===========================================================
+       SCRIPTS
+       =========================================================== -->
+
+  <script src="content.js"></script>
+
+  <script>
+    (function () {
+      /* ==========================================================
+         DETECT PROTOCOL — skip PWA on file:// (browser policy)
+         ========================================================== */
+
+      var isHTTP = window.location.protocol.startsWith('http');
+
+      // Inject manifest link only on HTTP (avoids CORS error on file://)
+      if (isHTTP) {
+        var manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = 'manifest.json';
+        document.head.appendChild(manifestLink);
+      }
+
+      /* ==========================================================
+         RENDER CONTENT FROM content.js
+         ========================================================== */
+
+      const guide = window.meetingGuide;
+      if (!guide) {
+        document.body.innerHTML =
+          '<p style="padding:40px;text-align:center;color:var(--mute)">Could not load meeting content.</p>';
+        return;
+      }
+
+      // Header
+      document.querySelector('.page-header__title').textContent = guide.meta.title;
+      var subtitleEl = document.querySelector('.page-header__subtitle');
+      if (guide.meta.tagline) {
+        subtitleEl.textContent = guide.meta.tagline;
+      } else {
+        subtitleEl.style.display = 'none';
+      }
+      document.querySelector('.intro-card__atmosphere').textContent = guide.meta.atmosphere;
+      document.querySelector('.intro-card__meta-duration').textContent =
+        'Set aside ' + guide.meta.duration;
+
+      // Build parts
+      const partsList = document.getElementById('parts-list');
+
+      guide.parts.forEach(function (part) {
+        const li = document.createElement('li');
+        li.className = 'part';
+        li.setAttribute('data-part-id', part.id);
+
+        // --- Accordion header ---
+        const header = document.createElement('button');
+        header.className = 'part__header';
+        header.setAttribute('aria-expanded', 'false');
+        header.setAttribute('type', 'button');
+
+        header.innerHTML =
+          '<span class="part__number">' + part.id + '</span>' +
+          '<span class="part__header-text">' +
+            '<span class="part__title">' + escapeHTML(part.title) + '</span>' +
+            '<span class="part__leader">' + escapeHTML(part.leader) + '</span>' +
+          '</span>' +
+          '<span class="part__chevron" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+          '</span>';
+
+        // --- Accordion body ---
+        const body = document.createElement('div');
+        body.className = 'part__body';
+
+        const bodyInner = document.createElement('div');
+        bodyInner.className = 'part__body-inner';
+
+        // Paragraphs
+        (part.paragraphs || []).forEach(function (p) {
+          const el = document.createElement('p');
+          el.textContent = p;
+          bodyInner.appendChild(el);
+        });
+
+        // Connection questions (Part 4)
+        if (part.questions && part.questions.length) {
+          const qList = document.createElement('ol');
+          qList.className = 'questions-list';
+
+          part.questions.forEach(function (item, qi) {
+            const qItem = document.createElement('li');
+            qItem.className = 'questions-list__item';
+            qItem.innerHTML =
+              '<p class="questions-list__q">' + (qi + 1) + '. ' + escapeHTML(item.q) + '</p>' +
+              '<p class="questions-list__note">' + escapeHTML(item.note) + '</p>';
+            qList.appendChild(qItem);
+          });
+
+          bodyInner.appendChild(qList);
+        }
+
+        // Done button
+        const doneBtn = document.createElement('button');
+        doneBtn.className = 'part__done-btn';
+        doneBtn.setAttribute('type', 'button');
+        doneBtn.setAttribute('aria-label', 'Mark ' + part.title + ' as done');
+        doneBtn.innerHTML =
+          '<svg class="part__done-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+          ' Done with this part';
+
+        bodyInner.appendChild(doneBtn);
+        body.appendChild(bodyInner);
+        li.appendChild(header);
+        li.appendChild(body);
+        partsList.appendChild(li);
+      });
+
+      /* ==========================================================
+         ACCORDION BEHAVIOR
+         ========================================================== */
+
+      function togglePart(header) {
+        const part = header.parentElement;
+        const body = part.querySelector('.part__body');
+        const isOpen = part.classList.contains('part--expanded');
+
+        if (isOpen) {
+          // CLOSE
+          body.style.maxHeight = body.scrollHeight + 'px';
+          body.offsetHeight;
+          body.style.maxHeight = '0px';
+          part.classList.remove('part--expanded');
+          header.setAttribute('aria-expanded', 'false');
+        } else {
+          // Close all other open sections first (true accordion)
+          document.querySelectorAll('.part--expanded').forEach(function (openPart) {
+            var openBody = openPart.querySelector('.part__body');
+            var openHeader = openPart.querySelector('.part__header');
+            openBody.style.maxHeight = openBody.scrollHeight + 'px';
+            openBody.offsetHeight;
+            openBody.style.maxHeight = '0px';
+            openPart.classList.remove('part--expanded');
+            if (openHeader) openHeader.setAttribute('aria-expanded', 'false');
+          });
+
+          // OPEN this one
+          part.classList.add('part--expanded');
+          header.setAttribute('aria-expanded', 'true');
+
+          body.style.maxHeight = 'none';
+          var fullHeight = body.scrollHeight;
+          body.style.maxHeight = '0px';
+          body.offsetHeight;
+          body.style.maxHeight = fullHeight + 'px';
+
+          var onTransitionEnd = function () {
+            body.style.maxHeight = 'none';
+            body.removeEventListener('transitionend', onTransitionEnd);
+          };
+          body.addEventListener('transitionend', onTransitionEnd);
+        }
+      }
+
+      // Delegate click on accordion headers
+      document.getElementById('parts-list').addEventListener('click', function (e) {
+        var header = e.target.closest('.part__header');
+        if (!header) return;
+
+        // Don't toggle if the done button was clicked
+        if (e.target.closest('.part__done-btn')) return;
+
+        togglePart(header);
+      });
+
+      // Keyboard support
+      document.getElementById('parts-list').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          var header = e.target.closest('.part__header');
+          if (!header) return;
+          if (e.target.closest('.part__done-btn')) return;
+          e.preventDefault();
+          togglePart(header);
+        }
+      });
+
+      /* ==========================================================
+         DONE TRACKING (in-memory — resets on refresh)
+         ========================================================== */
+
+      var doneState = {}; // fresh each meeting
+
+      function updateProgressUI(partId) {
+        var part = document.querySelector('[data-part-id="' + partId + '"]');
+        if (!part) return;
+
+        var dot = document.querySelector('.progress__dot[data-part="' + partId + '"]');
+        var label = document.querySelector('.progress__label[data-part="' + partId + '"]');
+        var btn = part.querySelector('.part__done-btn');
+
+        if (doneState[partId]) {
+          part.classList.add('part--done');
+          if (dot) dot.classList.add('progress__dot--done');
+          if (label) label.classList.add('progress__label--done');
+          if (btn) {
+            btn.classList.add('part__done-btn--checked');
+            btn.innerHTML =
+              '<svg class="part__done-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+              ' Done';
+          }
+        } else {
+          part.classList.remove('part--done');
+          if (dot) dot.classList.remove('progress__dot--done');
+          if (label) label.classList.remove('progress__label--done');
+          if (btn) {
+            btn.classList.remove('part__done-btn--checked');
+            btn.innerHTML =
+              '<svg class="part__done-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+              ' Done with this part';
+          }
+        }
+
+        // Check if all 6 are done
+        var allDone = [1, 2, 3, 4, 5, 6, 7].every(function (id) { return doneState[id]; });
+        if (allDone) {
+          showToast('🎉 Congratulations! You finished your weekly meeting together.');
+        }
+      }
+
+      // Delegate click on done buttons
+      document.getElementById('parts-list').addEventListener('click', function (e) {
+        var btn = e.target.closest('.part__done-btn');
+        if (!btn) return;
+
+        var part = btn.closest('.part');
+        var partId = part.getAttribute('data-part-id');
+        doneState[partId] = !doneState[partId];
+        updateProgressUI(partId);
+
+        // Close the accordion after marking done
+        if (doneState[partId]) {
+          var header = part.querySelector('.part__header');
+          if (header && part.classList.contains('part--expanded')) {
+            togglePart(header);
+          }
+        }
+      });
+
+      /* ==========================================================
+         SERVICE WORKER REGISTRATION (HTTP only)
+         ========================================================== */
+
+      if (isHTTP && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('./sw.js').then(
+            function (registration) {
+              console.log('SW registered:', registration.scope);
+            },
+            function (err) {
+              console.log('SW registration failed:', err);
+            }
+          );
+        });
+      }
+
+      /* ==========================================================
+         TOAST
+         ========================================================== */
+
+      var toastEl = document.getElementById('toast');
+      var toastTimeout;
+
+      function showToast(message) {
+        toastEl.textContent = message;
+        toastEl.classList.add('toast--visible');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(function () {
+          toastEl.classList.remove('toast--visible');
+        }, 4000);
+      }
+
+      /* ==========================================================
+         OFFLINE DETECTION
+         ========================================================== */
+
+      var offlineBanner = document.getElementById('offline-banner');
+      var bannerTimeout;
+
+      function showOfflineBanner() {
+        offlineBanner.classList.add('offline-banner--visible');
+        clearTimeout(bannerTimeout);
+        bannerTimeout = setTimeout(function () {
+          offlineBanner.classList.remove('offline-banner--visible');
+        }, 3000);
+      }
+
+      window.addEventListener('online', function () {
+        offlineBanner.textContent = "You're back online.";
+        showOfflineBanner();
+      });
+
+      window.addEventListener('offline', function () {
+        offlineBanner.textContent = "You're offline — this guide still works.";
+        showOfflineBanner();
+      });
+
+      /* ==========================================================
+         THEME TOGGLE
+         ========================================================== */
+
+      var THEME_KEY = 'hw-meeting-theme';
+      var themeToggle = document.getElementById('theme-toggle');
+
+      function getTheme() {
+        try {
+          return localStorage.getItem(THEME_KEY);
+        } catch (_) { return null; }
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
+        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) metaTheme.content = theme === 'dark' ? '#1a1a1a' : '#ffffff';
+      }
+
+      // Initialize: prefer saved, then system preference
+      var savedTheme = getTheme();
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      }
+
+      themeToggle.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      /* ==========================================================
+         UTILITY
+         ========================================================== */
+
+      function escapeHTML(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+      }
+    })();
+  </script>
+</body>
+</html>
